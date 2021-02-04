@@ -10,34 +10,36 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
 export class AppComponent {
   title = 'YzYap';
 
-  @ViewChild('container', { read: ViewContainerRef }) container!: ViewContainerRef;
-
-  private _counter = 1;
+  @ViewChild('card1', { read: ViewContainerRef }) card1!: ViewContainerRef;
+  @ViewChild('card2', { read: ViewContainerRef }) card2!: ViewContainerRef;
+  private _counter = 0;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   add(): void {
 
     // create the component factory
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(TestComponent);
 
     // add the component to the view
-    const componentRef = this.container.createComponent(componentFactory);
-
-    // pass some data to the component
-    componentRef.instance.index = this._counter++;
-  }
-
-  add2(): void {
-
-    // create the component factory
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(SidebarComponent);
-
     // add the component to the view
-    const componentRef = this.container.createComponent(componentFactory);
+    //const componentRef = this.card1.createComponent(componentFactory);
 
     // pass some data to the component
-    componentRef.instance.index = this._counter++;
+    //componentRef.instance.index = this._counter++;
+
+    if (this._counter % 2 == 0){
+      console.log('1.taraf');
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(TestComponent);
+      const componentRef1 = this.card1.createComponent(componentFactory);
+      componentRef1.instance.index = this._counter++;
+    }
+    else{
+      console.log('2.taraf');
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(TestComponent);
+      const componentRef2 = this.card2.createComponent(componentFactory);
+      componentRef2.instance.index = this._counter++;
+    }
   }
+
   
 }

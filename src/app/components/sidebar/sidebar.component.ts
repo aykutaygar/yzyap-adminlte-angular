@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   }
   
   add(): void {
+    
     console.log('ok');
 
     // create the component factory
